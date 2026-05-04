@@ -13,7 +13,9 @@ No orchestration code. No glue logic. Just define your agents and run.
 
 ## 🚀 Live Demo
 
-Explore a real-world B2B use case built with Spring Agent Flow:
+🔴 Explore a real-world B2B **use case** built with **Spring Agent Flow**:
+
+<img width="800" height="400" alt="chrome-capture-2026-05-04" src="https://github.com/user-attachments/assets/8825501e-f1bf-4c27-b734-be348cd83e12" />
 
 👉 https://huggingface.co/spaces/datallmhub/multi-agent-customer-ops
 
