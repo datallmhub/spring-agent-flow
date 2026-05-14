@@ -13,6 +13,7 @@ import io.github.asekka.springai.agents.core.AgentContext;
 import io.github.asekka.springai.agents.core.AgentError;
 import io.github.asekka.springai.agents.core.AgentEvent;
 import io.github.asekka.springai.agents.core.AgentResult;
+import io.github.asekka.springai.agents.core.InterruptRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ai.chat.messages.Message;
@@ -30,6 +31,7 @@ public final class AgentGraph implements Agent {
     private final String entryNode;
     private final ErrorPolicy errorPolicy;
     private final RetryPolicy retryPolicy;
+    private final BudgetPolicy budgetPolicy;
     private final int maxIterations;
     private final List<AgentListener> listeners;
     @Nullable
@@ -44,6 +46,7 @@ public final class AgentGraph implements Agent {
         this.errorPolicy = b.errorPolicy;
         this.retryPolicy = b.retryPolicy != null ? b.retryPolicy
                 : (b.errorPolicy == ErrorPolicy.RETRY_ONCE ? RetryPolicy.once() : RetryPolicy.none());
+        this.budgetPolicy = b.budgetPolicy;
         this.maxIterations = b.maxIterations;
         this.listeners = List.copyOf(b.listeners);
         this.checkpointStore = b.checkpointStore;
@@ -273,8 +276,13 @@ public final class AgentGraph implements Agent {
         RetryPolicy policy = effectivePolicy(node);
         int attempts = Math.max(1, policy.maxAttempts());
         for (int i = 0; i < attempts; i++) {
+            AgentResult gate = gateBudget(node.name(), context);
+            if (gate != null) {
+                return new NodeOutcome(gate, System.nanoTime() - start);
+            }
             result = tryStream(node, context, sink, i);
             if (!result.hasError()) {
+                budgetPolicy.record(node.name(), result);
                 break;
             }
             AgentError err = result.error();
@@ -335,8 +343,13 @@ public final class AgentGraph implements Agent {
         RetryPolicy policy = effectivePolicy(node);
         int attempts = Math.max(1, policy.maxAttempts());
         for (int i = 0; i < attempts; i++) {
+            AgentResult gate = gateBudget(node.name(), context);
+            if (gate != null) {
+                return new NodeOutcome(gate, System.nanoTime() - start);
+            }
             result = tryExecute(node, context, i);
             if (!result.hasError()) {
+                budgetPolicy.record(node.name(), result);
                 break;
             }
             AgentError err = result.error();
@@ -359,6 +372,29 @@ public final class AgentGraph implements Agent {
         }
 
         return new NodeOutcome(result, duration);
+    }
+
+    /**
+     * Asks the {@link BudgetPolicy} whether the upcoming attempt fits in the
+     * configured budget. Returns {@code null} when the call is allowed,
+     * otherwise an interrupted {@link AgentResult} carrying an
+     * {@link InterruptRequest} that the caller can resume from.
+     */
+    @Nullable
+    private AgentResult gateBudget(String nodeName, AgentContext context) {
+        if (budgetPolicy == BudgetPolicy.NOOP) {
+            return null;
+        }
+        BudgetPolicy.Decision decision = budgetPolicy.check(nodeName, context);
+        if (decision.allowed()) {
+            return null;
+        }
+        BudgetPolicy.Breach breach = decision.breach();
+        log.warn("graph.budget.breach: graph={} node={} scope={} limit={} projected={}",
+                name, nodeName, breach.scope(), breach.limit(), breach.projected());
+        InterruptRequest request = new InterruptRequest(
+                "budget.exceeded:" + breach.scope(), breach);
+        return AgentResult.interrupted(request);
     }
 
     private RetryPolicy effectivePolicy(Node node) {
@@ -481,6 +517,7 @@ public final class AgentGraph implements Agent {
         private String entryNode;
         private ErrorPolicy errorPolicy = ErrorPolicy.FAIL_FAST;
         @Nullable private RetryPolicy retryPolicy;
+        private BudgetPolicy budgetPolicy = BudgetPolicy.NOOP;
         private int maxIterations = 25;
         private final List<AgentListener> listeners = new ArrayList<>();
         @Nullable
@@ -539,6 +576,11 @@ public final class AgentGraph implements Agent {
 
         public Builder retryPolicy(RetryPolicy policy) {
             this.retryPolicy = Objects.requireNonNull(policy, "policy");
+            return this;
+        }
+
+        public Builder budgetPolicy(BudgetPolicy policy) {
+            this.budgetPolicy = Objects.requireNonNull(policy, "policy");
             return this;
         }
 
