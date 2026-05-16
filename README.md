@@ -4,15 +4,13 @@
 
 No orchestration code. No glue logic. Just define your agents and run.
 
-<img width="250" height="400" alt="agents" src="https://github.com/user-attachments/assets/7c954ec6-a6f5-42f8-8f84-1de9332debd1" />
-
-
 [![build](https://github.com/datallmhub/agentflow4j/actions/workflows/build.yml/badge.svg)](https://github.com/datallmhub/agentflow4j/actions)
 [![Java 17+](https://img.shields.io/badge/Java-17%2B-blue)](https://adoptium.net/)
 [![Spring AI](https://img.shields.io/badge/Spring%20AI-1.0-green)](https://docs.spring.io/spring-ai/reference/)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 
 ---
+<img width="250" height="400" alt="agents" src="https://github.com/user-attachments/assets/7c954ec6-a6f5-42f8-8f84-1de9332debd1" />
 
 ## 🚀 Try it in 30 seconds (no API key)
 
