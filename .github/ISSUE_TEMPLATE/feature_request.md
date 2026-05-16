@@ -10,7 +10,7 @@ assignees: ""
 
 Why is this feature needed?
 
-What problem does it solve for users of Spring Agent Flow?
+What problem does it solve for users of AgentFlow4J?
 
 ## Proposal
 

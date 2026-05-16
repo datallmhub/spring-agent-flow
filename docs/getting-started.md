@@ -23,8 +23,8 @@ Distributed via JitPack — declare the repository, then the starter:
 </repositories>
 
 <dependency>
-    <groupId>com.github.datallmhub.spring-agent-flow</groupId>
-    <artifactId>spring-agent-flow-starter</artifactId>
+    <groupId>com.github.datallmhub.agentflow4j</groupId>
+    <artifactId>agentflow4j-starter</artifactId>
     <version>v0.5.0</version>
 </dependency>
 ```
@@ -55,12 +55,12 @@ Distributed via JitPack — declare the repository, then the starter:
   (`addNode(name, agent, policy)`). Retains `ErrorPolicy.RETRY_ONCE` as a
   compatibility shim. See [resilient-typed-executor.md](recipes/resilient-typed-executor.md).
 - **`CircuitBreakerPolicy`**: graph-module SPI with a no-op default; a
-  Resilience4j adapter lives in `spring-agent-flow-resilience4j`. Applied
+  Resilience4j adapter lives in `agentflow4j-resilience4j`. Applied
   per-node so retries iterate through the breaker. See
   [circuit-breaker.md](recipes/circuit-breaker.md).
 - **Durable checkpoints**: `JdbcCheckpointStore` (portable upsert, H2/Postgres/
   MySQL) and `RedisCheckpointStore` (optional TTL) ship in
-  `spring-agent-flow-checkpoint` alongside a Jackson codec with a
+  `agentflow4j-checkpoint` alongside a Jackson codec with a
   `StateTypeRegistry` whitelist. See
   [durable-runs.md](recipes/durable-runs.md).
 
@@ -90,10 +90,10 @@ Build a two-step graph that summarizes then critiques a prompt. No Spring
 context required — just compose plain Java objects.
 
 ```java
-import io.github.asekka.springai.agents.core.AgentContext;
-import io.github.asekka.springai.agents.core.AgentResult;
-import io.github.asekka.springai.agents.graph.AgentGraph;
-import io.github.asekka.springai.agents.squad.ExecutorAgent;
+import io.github.datallmhub.agentflow4j.core.AgentContext;
+import io.github.datallmhub.agentflow4j.core.AgentResult;
+import io.github.datallmhub.agentflow4j.graph.AgentGraph;
+import io.github.datallmhub.agentflow4j.squad.ExecutorAgent;
 
 ExecutorAgent summarizer = ExecutorAgent.builder()
         .name("summarize")
@@ -150,7 +150,7 @@ spring:
         metrics: true
 ```
 
-Properties are bound by `spring-agent-flow-starter`. When a `MeterRegistry` bean
+Properties are bound by `agentflow4j-starter`. When a `MeterRegistry` bean
 is present, the starter registers a `MicrometerAgentListener` that emits
 `agents.execution.count`, `agents.execution.duration`, `agents.graph.transitions`,
 and `agents.execution.errors`.

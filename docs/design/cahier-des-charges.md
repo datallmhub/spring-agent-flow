@@ -1,4 +1,4 @@
-# spring-agent-flow — Cahier des Charges
+# AgentFlow4J — Cahier des Charges
 
 **Version :** 1.2 (clarifications API et state lifecycle)
 **Date :** Avril 2026
@@ -8,7 +8,7 @@
 
 ## 🎯 Promesse
 
-> **spring-agent-flow** permet de coordonner plusieurs agents spécialisés dans des applications Spring Boot sans écrire de logique d'orchestration.
+> **AgentFlow4J** permet de coordonner plusieurs agents spécialisés dans des applications Spring Boot sans écrire de logique d'orchestration.
 
 **Exemple minimal :**
 
@@ -213,7 +213,7 @@ Responsabilités :
 
 ### 3.4 Intégration Spring
 
-- Auto-configuration Spring Boot via `spring-agent-flow-starter`
+- Auto-configuration Spring Boot via `agentflow4j-starter`
 - Injection de `ChatClient` dans les agents
 - Configuration via `application.yml` (voir annexe A)
 - Compatibilité avec `ChatMemory` existant
@@ -268,12 +268,12 @@ public record AgentError(
 ### 4.2 Architecture modulaire
 
 ```
-spring-agent-flow/
-├── spring-agent-flow-core/         Agent, AgentContext, AgentResult, AgentEvent, StateKey/StateBag
-├── spring-agent-flow-graph/        AgentGraph, Node, Edge, ErrorPolicy
-├── spring-agent-flow-squad/        CoordinatorAgent, ExecutorAgent, RoutingStrategy
-├── spring-agent-flow-test/         MockAgent, TestGraph, fixtures JUnit
-└── spring-agent-flow-starter/      Auto-configuration Spring Boot
+agentflow4j/
+├── agentflow4j-core/         Agent, AgentContext, AgentResult, AgentEvent, StateKey/StateBag
+├── agentflow4j-graph/        AgentGraph, Node, Edge, ErrorPolicy
+├── agentflow4j-squad/        CoordinatorAgent, ExecutorAgent, RoutingStrategy
+├── agentflow4j-test/         MockAgent, TestGraph, fixtures JUnit
+└── agentflow4j-starter/      Auto-configuration Spring Boot
 ```
 
 ---
@@ -423,8 +423,8 @@ spring:
 
 ```xml
 <dependency>
-    <groupId>io.github.asekka</groupId>
-    <artifactId>spring-agent-flow-starter</artifactId>
+    <groupId>io.github.datallmhub</groupId>
+    <artifactId>agentflow4j-starter</artifactId>
     <version>0.1.0</version>
 </dependency>
 ```

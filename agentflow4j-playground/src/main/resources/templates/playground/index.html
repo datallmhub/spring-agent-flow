@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title}">agentflow4j playground</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="h-screen bg-slate-950 text-slate-100">
+<div class="h-full flex flex-col max-w-3xl mx-auto p-6">
+    <header class="flex items-center justify-between mb-4">
+        <h1 class="text-xl font-semibold tracking-tight" th:text="${title}">agentflow4j playground</h1>
+        <form th:action="@{/playground/api/reset}" method="post"
+              onsubmit="resetUI(); return true;">
+            <input type="hidden" name="agent" id="reset-agent" value=""/>
+            <button class="text-xs text-slate-400 hover:text-slate-200 underline">reset</button>
+        </form>
+    </header>
+
+    <div class="mb-3 flex gap-2 items-center">
+        <label for="agent" class="text-xs uppercase text-slate-400 tracking-wider">Agent</label>
+        <select id="agent"
+                class="bg-slate-900 border border-slate-800 rounded px-2 py-1 text-sm focus:outline-none focus:border-indigo-500">
+            <option th:each="a : ${agents}" th:value="${a}" th:text="${a}"></option>
+            <option th:if="${#lists.isEmpty(agents)}" value="" disabled selected>
+                No Agent beans found
+            </option>
+        </select>
+        <span id="status" class="text-xs text-slate-500 ml-auto"></span>
+    </div>
+
+    <div id="chat"
+         class="flex-1 overflow-y-auto bg-slate-900 border border-slate-800 rounded p-4 space-y-3 text-sm">
+    </div>
+
+    <form id="form" class="mt-3 flex gap-2" onsubmit="return send(event)">
+        <input id="message" autocomplete="off" autofocus
+               placeholder="Ask the selected agent..."
+               class="flex-1 bg-slate-900 border border-slate-800 rounded px-3 py-2 text-sm focus:outline-none focus:border-indigo-500"/>
+        <button id="send"
+                class="bg-indigo-600 hover:bg-indigo-500 disabled:bg-slate-700 disabled:cursor-not-allowed text-white text-sm font-medium px-4 rounded">
+            Send
+        </button>
+    </form>
+</div>
+
+<script>
+    const chat = document.getElementById('chat');
+    const status = document.getElementById('status');
+    const sendBtn = document.getElementById('send');
+    const agentSelect = document.getElementById('agent');
+    const resetAgentInput = document.getElementById('reset-agent');
+
+    agentSelect.addEventListener('change', () => {
+        resetAgentInput.value = agentSelect.value;
+    });
+    resetAgentInput.value = agentSelect.value || '';
+
+    function bubble(role, text) {
+        const wrap = document.createElement('div');
+        wrap.className = role === 'user'
+            ? 'flex justify-end'
+            : 'flex justify-start';
+        const b = document.createElement('div');
+        b.className = role === 'user'
+            ? 'bg-indigo-600 text-white rounded-lg px-3 py-2 max-w-[80%] whitespace-pre-wrap'
+            : 'bg-slate-800 text-slate-100 rounded-lg px-3 py-2 max-w-[80%] whitespace-pre-wrap';
+        b.textContent = text;
+        wrap.appendChild(b);
+        chat.appendChild(wrap);
+        chat.scrollTop = chat.scrollHeight;
+        return b;
+    }
+
+    function send(e) {
+        e.preventDefault();
+        const input = document.getElementById('message');
+        const text = input.value.trim();
+        const agent = agentSelect.value;
+        if (!text || !agent) return false;
+
+        bubble('user', text);
+        input.value = '';
+        const assistant = bubble('assistant', '');
+        sendBtn.disabled = true;
+        status.textContent = '…';
+
+        const url = '/playground/api/chat'
+            + '?agent=' + encodeURIComponent(agent)
+            + '&message=' + encodeURIComponent(text);
+        const es = new EventSource(url);
+
+        let buffer = '';
+        es.addEventListener('token', ev => {
+            buffer += ev.data;
+            assistant.textContent = buffer;
+            chat.scrollTop = chat.scrollHeight;
+        });
+        es.addEventListener('completed', ev => {
+            if (buffer.length === 0 && ev.data) {
+                assistant.textContent = ev.data;
+            }
+            status.textContent = 'ok';
+            sendBtn.disabled = false;
+            es.close();
+        });
+        es.addEventListener('error', ev => {
+            if (ev.data) {
+                assistant.textContent = '⚠ ' + ev.data;
+            } else {
+                assistant.textContent = '⚠ connection error';
+            }
+            status.textContent = 'error';
+            sendBtn.disabled = false;
+            es.close();
+        });
+        es.addEventListener('tool', ev => {
+            status.textContent = 'tool: ' + ev.data;
+        });
+        es.addEventListener('transition', ev => {
+            status.textContent = ev.data;
+        });
+        return false;
+    }
+
+    function resetUI() {
+        chat.innerHTML = '';
+        status.textContent = '';
+    }
+</script>
+</body>
+</html>

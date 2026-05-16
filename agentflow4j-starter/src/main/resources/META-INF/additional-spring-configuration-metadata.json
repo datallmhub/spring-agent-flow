@@ -1,0 +1,68 @@
+{
+  "groups": [
+    {
+      "name": "agentflow4j",
+      "type": "io.github.datallmhub.agentflow4j.autoconfigure.AgentFlow4jProperties",
+      "description": "Configuration for the agentflow4j multi-agent orchestration framework."
+    },
+    {
+      "name": "agentflow4j.observability",
+      "type": "io.github.datallmhub.agentflow4j.autoconfigure.AgentFlow4jProperties$Observability",
+      "description": "Observability settings: metrics and event emission."
+    },
+    {
+      "name": "agentflow4j.squad",
+      "type": "io.github.datallmhub.agentflow4j.autoconfigure.AgentFlow4jProperties$Squad",
+      "description": "Squad role defaults (coordinator / executors)."
+    }
+  ],
+  "properties": [
+    {
+      "name": "agentflow4j.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether the auto-configuration is active.",
+      "defaultValue": true
+    },
+    {
+      "name": "agentflow4j.default-error-policy",
+      "type": "io.github.datallmhub.agentflow4j.graph.ErrorPolicy",
+      "description": "Default ErrorPolicy applied when a graph does not specify one.",
+      "defaultValue": "FAIL_FAST"
+    },
+    {
+      "name": "agentflow4j.observability.metrics",
+      "type": "java.lang.Boolean",
+      "description": "Register a MicrometerAgentListener when a MeterRegistry is present.",
+      "defaultValue": true
+    },
+    {
+      "name": "agentflow4j.observability.events",
+      "type": "java.lang.Boolean",
+      "description": "Emit AgentEvent streams from invokeStream().",
+      "defaultValue": true
+    },
+    {
+      "name": "agentflow4j.squad.default-routing-strategy",
+      "type": "io.github.datallmhub.agentflow4j.autoconfigure.AgentFlow4jProperties$Squad$DefaultRoutingStrategy",
+      "description": "Default strategy injected as a RoutingStrategy bean when no user-defined one is present.",
+      "defaultValue": "FIRST"
+    }
+  ],
+  "hints": [
+    {
+      "name": "agentflow4j.default-error-policy",
+      "values": [
+        { "value": "FAIL_FAST",  "description": "Propagate the first error and stop the graph." },
+        { "value": "RETRY_ONCE", "description": "Retry the failing node once, then fail." },
+        { "value": "SKIP_NODE",  "description": "Log the error, skip the node, continue via outgoing edges." }
+      ]
+    },
+    {
+      "name": "agentflow4j.squad.default-routing-strategy",
+      "values": [
+        { "value": "FIRST",      "description": "Always route to the first registered executor." },
+        { "value": "LLM_DRIVEN", "description": "Ask the LLM to pick an executor name (requires a ChatClient bean)." }
+      ]
+    }
+  ]
+}

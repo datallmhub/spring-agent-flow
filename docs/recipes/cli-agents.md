@@ -1,6 +1,6 @@
 # Recipe — Hybrid graphs with external CLI agents (Claude Code, Codex, Gemini, …)
 
-`spring-agent-flow-cli-agents` lets you drop a
+`agentflow4j-cli-agents` lets you drop a
 [`spring-ai-community/spring-ai-agents`](https://github.com/spring-ai-community/spring-ai-agents)
 provider — Claude Code, Codex, Gemini CLI, Amazon Q, Amp, Qwen, SWE — into
 an `AgentGraph` as if it were any other `Agent`.
@@ -8,15 +8,15 @@ an `AgentGraph` as if it were any other `Agent`.
 The two projects are orthogonal. Their `AgentClient`/`AgentModel` give you a
 **unified API for autonomous CLI agents**; this module wraps that API so the
 agents can participate in the **stateful workflow runtime** of
-spring-agent-flow. Result: a single graph can mix `ChatClient`-driven
+AgentFlow4J. Result: a single graph can mix `ChatClient`-driven
 `ExecutorAgent`s with subprocess-driven CLI agents.
 
 ## 1. Module
 
 ```xml
 <dependency>
-    <groupId>com.github.datallmhub.spring-agent-flow</groupId>
-    <artifactId>spring-agent-flow-cli-agents</artifactId>
+    <groupId>com.github.datallmhub.agentflow4j</groupId>
+    <artifactId>agentflow4j-cli-agents</artifactId>
     <version>v0.5.0</version>
 </dependency>
 ```
@@ -28,7 +28,7 @@ upstream project — declare whichever ones you need.
 ## 2. Wrap an `AgentModel` as an `Agent`
 
 ```java
-import io.github.asekka.springai.agents.cliagents.CliAgentNode;
+import io.github.datallmhub.agentflow4j.cliagents.CliAgentNode;
 import org.springaicommunity.agents.claude.ClaudeAgentModel;
 import org.springaicommunity.agents.claude.ClaudeAgentOptions;
 

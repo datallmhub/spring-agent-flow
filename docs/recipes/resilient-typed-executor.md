@@ -16,8 +16,8 @@ key's type and the executor writes it into `AgentContext` in one step — no
 parsing, no casts in downstream edges.
 
 ```java
-import io.github.asekka.springai.agents.core.*;
-import io.github.asekka.springai.agents.squad.ExecutorAgent;
+import io.github.datallmhub.agentflow4j.core.*;
+import io.github.datallmhub.agentflow4j.squad.ExecutorAgent;
 
 public record TriageReport(String severity, String summary, List<String> tags) {}
 
@@ -72,7 +72,7 @@ Graph-wide policy handles the common case: every node inherits the same
 backoff. Per-node override takes precedence for risky calls.
 
 ```java
-import io.github.asekka.springai.agents.graph.*;
+import io.github.datallmhub.agentflow4j.graph.*;
 
 // Only retry transient network errors, 3 attempts, 200ms → 2s backoff with
 // ±20% jitter.

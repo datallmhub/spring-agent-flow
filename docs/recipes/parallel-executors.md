@@ -5,10 +5,10 @@ gather `Agent` that runs N branches concurrently and joins their results via a
 `Combiner`. No hand-rolled Reactor plumbing required.
 
 ```java
-import io.github.asekka.springai.agents.core.Agent;
-import io.github.asekka.springai.agents.core.AgentContext;
-import io.github.asekka.springai.agents.core.AgentResult;
-import io.github.asekka.springai.agents.squad.ParallelAgent;
+import io.github.datallmhub.agentflow4j.core.Agent;
+import io.github.datallmhub.agentflow4j.core.AgentContext;
+import io.github.datallmhub.agentflow4j.core.AgentResult;
+import io.github.datallmhub.agentflow4j.squad.ParallelAgent;
 
 Agent fanOut = ParallelAgent.builder()
         .name("fan-out")

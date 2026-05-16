@@ -10,8 +10,8 @@ Two ways to build it:
 ## Option 1 — `ReActAgent` (v0.2+)
 
 ```java
-import io.github.asekka.springai.agents.core.*;
-import io.github.asekka.springai.agents.squad.*;
+import io.github.datallmhub.agentflow4j.core.*;
+import io.github.datallmhub.agentflow4j.squad.*;
 
 Agent reasoner = ExecutorAgent.builder()
         .chatClient(chatClient)
@@ -40,8 +40,8 @@ the next call. The loop stops when `stopWhen` returns true (default:
 ## Option 2 — Self-edge inside a graph
 
 ```java
-import io.github.asekka.springai.agents.core.*;
-import io.github.asekka.springai.agents.graph.*;
+import io.github.datallmhub.agentflow4j.core.*;
+import io.github.datallmhub.agentflow4j.graph.*;
 
 StateKey<Boolean> DONE  = StateKey.of("done", Boolean.class);
 StateKey<Integer> STEPS = StateKey.of("steps", Integer.class);

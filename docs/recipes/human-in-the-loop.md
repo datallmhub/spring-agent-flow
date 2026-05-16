@@ -17,8 +17,8 @@ stopped. Two pieces make it work: `AgentResult.interrupted(reason)` and a
 ## Minimal example
 
 ```java
-import io.github.asekka.springai.agents.core.*;
-import io.github.asekka.springai.agents.graph.*;
+import io.github.datallmhub.agentflow4j.core.*;
+import io.github.datallmhub.agentflow4j.graph.*;
 import org.springframework.ai.chat.messages.UserMessage;
 
 InMemoryCheckpointStore store = new InMemoryCheckpointStore();

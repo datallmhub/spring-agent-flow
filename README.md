@@ -4,7 +4,7 @@
 
 No orchestration code. No glue logic. Just define your agents and run.
 
-[![build](https://github.com/datallmhub/spring-agent-flow/actions/workflows/build.yml/badge.svg)](https://github.com/datallmhub/spring-agent-flow/actions)
+[![build](https://github.com/datallmhub/agentflow4j/actions/workflows/build.yml/badge.svg)](https://github.com/datallmhub/agentflow4j/actions)
 [![Java 17+](https://img.shields.io/badge/Java-17%2B-blue)](https://adoptium.net/)
 [![Spring AI](https://img.shields.io/badge/Spring%20AI-1.0-green)](https://docs.spring.io/spring-ai/reference/)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
@@ -78,7 +78,7 @@ GPT-5 shows stronger tool integration and instruction following.
 
 > **This is a multi-step, stateful workflow with routing, coordination, and resilience — without writing orchestration code.**
 
-⭐ **If this saves you time, consider [starring the repo](https://github.com/datallmhub/spring-agent-flow).**
+⭐ **If this saves you time, consider [starring the repo](https://github.com/datallmhub/agentflow4j).**
 
 ---
 
@@ -170,13 +170,13 @@ AgentResult result = graph.invoke(AgentContext.of("..."));
 | Manual `while` loops | Don't scale, retries are hard, state becomes fragile |
 | LangChain-style flows | Limited execution control, Python-first |
 
-**spring-agent-flow provides:**
+**AgentFlow4J provides:**
 
 - explicit execution graphs
 - built-in resilience (retry + circuit breaker)
 - durable, typed state
 
-| Spring AI | spring-agent-flow |
+| Spring AI | AgentFlow4J |
 |---|---|
 | Primitives (`ChatClient`, tools) | Structured runtime (`AgentGraph`, `CoordinatorAgent`) |
 | Manual orchestration | Graph-based execution |
@@ -189,10 +189,10 @@ AgentResult result = graph.invoke(AgentContext.of("..."));
 ## 🚀 Try it in 30 seconds (no API key required)
 
 ```bash
-git clone https://github.com/datallmhub/spring-agent-flow.git
-cd spring-agent-flow
+git clone https://github.com/datallmhub/agentflow4j.git
+cd agentflow4j
 mvn install -DskipTests -q
-mvn -pl spring-agent-flow-samples exec:java
+mvn -pl agentflow4j-samples exec:java
 ```
 
 👉 Runs a real multi-agent workflow with routing, coordination, and state — fully simulated.
@@ -249,8 +249,8 @@ Distributed via [JitPack](https://jitpack.io).
 </repositories>
 
 <dependency>
-    <groupId>com.github.datallmhub.spring-agent-flow</groupId>
-    <artifactId>spring-agent-flow-starter</artifactId>
+    <groupId>com.github.datallmhub.agentflow4j</groupId>
+    <artifactId>agentflow4j-starter</artifactId>
     <version>v0.5.0</version>
 </dependency>
 ```
@@ -263,7 +263,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.github.datallmhub.spring-agent-flow:spring-agent-flow-starter:v0.5.0'
+    implementation 'com.github.datallmhub.agentflow4j:agentflow4j-starter:v0.5.0'
 }
 ```
 
@@ -271,14 +271,14 @@ dependencies {
 
 | Module | Use case |
 |---|---|
-| `spring-agent-flow-starter` | Spring Boot auto-config, properties, Micrometer listener |
-| `spring-agent-flow-core` | Minimal API (`Agent`, `AgentContext`, `StateKey`, `AgentResult`) |
-| `spring-agent-flow-graph` | `AgentGraph`, `RetryPolicy`, `CircuitBreakerPolicy` SPI, checkpoint contract |
-| `spring-agent-flow-squad` | `CoordinatorAgent`, `ExecutorAgent`, `ReActAgent`, `ParallelAgent`, `RoutingStrategy` |
-| `spring-agent-flow-checkpoint` | `JdbcCheckpointStore`, `RedisCheckpointStore`, Jackson codec |
-| `spring-agent-flow-resilience4j` | `CircuitBreakerPolicy` adapter backed by Resilience4j |
-| `spring-agent-flow-cli-agents` | `CliAgentNode` — runs Claude Code / Codex / Gemini CLI agents as graph nodes |
-| `spring-agent-flow-test` | `MockAgent`, `TestGraph` for unit-testing graphs |
+| `agentflow4j-starter` | Spring Boot auto-config, properties, Micrometer listener |
+| `agentflow4j-core` | Minimal API (`Agent`, `AgentContext`, `StateKey`, `AgentResult`) |
+| `agentflow4j-graph` | `AgentGraph`, `RetryPolicy`, `CircuitBreakerPolicy` SPI, checkpoint contract |
+| `agentflow4j-squad` | `CoordinatorAgent`, `ExecutorAgent`, `ReActAgent`, `ParallelAgent`, `RoutingStrategy` |
+| `agentflow4j-checkpoint` | `JdbcCheckpointStore`, `RedisCheckpointStore`, Jackson codec |
+| `agentflow4j-resilience4j` | `CircuitBreakerPolicy` adapter backed by Resilience4j |
+| `agentflow4j-cli-agents` | `CliAgentNode` — runs Claude Code / Codex / Gemini CLI agents as graph nodes |
+| `agentflow4j-test` | `MockAgent`, `TestGraph` for unit-testing graphs |
 
 Minimal `application.yml`:
 
@@ -403,7 +403,7 @@ This project is independent and not affiliated with [`spring-ai-community/agent-
 
 That project focuses on CLI agent integrations (Claude Code, Codex, Gemini).
 
-**spring-agent-flow** focuses on something different:
+**AgentFlow4J** focuses on something different:
 a graph-based runtime for stateful, multi-step agent workflows on top of Spring AI.
 
 ---

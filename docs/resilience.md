@@ -1,6 +1,6 @@
 # Resilience & Error Handling
 
-LLM-based workflows are inherently non-deterministic. Network failures, rate limits, and "hallucinations" are part of the game. `spring-agent-flow` provides built-in tools to handle these gracefully.
+LLM-based workflows are inherently non-deterministic. Network failures, rate limits, and "hallucinations" are part of the game. `agentflow4j` provides built-in tools to handle these gracefully.
 
 ---
 
@@ -27,7 +27,7 @@ if (result.hasError()) {
 
 ## 3. Circuit Breaker Support
 
-When using `spring-agent-flow-starter`, we integrate with Spring AI's native retry and circuit breaker advisors. This ensures that if an LLM provider is down, your application remains stable and doesn't waste tokens on guaranteed failures.
+When using `agentflow4j-starter`, we integrate with Spring AI's native retry and circuit breaker advisors. This ensures that if an LLM provider is down, your application remains stable and doesn't waste tokens on guaranteed failures.
 
 ## 4. Loop Prevention
 

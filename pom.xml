@@ -5,14 +5,14 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>io.github.asekka</groupId>
-    <artifactId>spring-agent-flow-parent</artifactId>
+    <groupId>io.github.datallmhub</groupId>
+    <artifactId>agentflow4j-parent</artifactId>
     <version>0.5.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>spring-agent-flow</name>
+    <name>AgentFlow4J</name>
     <description>Multi-agent orchestration framework on top of Spring AI</description>
-    <url>https://github.com/datallmhub/spring-agent-flow</url>
+    <url>https://github.com/datallmhub/agentflow4j</url>
 
     <licenses>
         <license>
@@ -22,15 +22,16 @@
     </licenses>
 
     <modules>
-        <module>spring-agent-flow-core</module>
-        <module>spring-agent-flow-graph</module>
-        <module>spring-agent-flow-squad</module>
-        <module>spring-agent-flow-checkpoint</module>
-        <module>spring-agent-flow-resilience4j</module>
-        <module>spring-agent-flow-cli-agents</module>
-        <module>spring-agent-flow-test</module>
-        <module>spring-agent-flow-starter</module>
-        <module>spring-agent-flow-samples</module>
+        <module>agentflow4j-core</module>
+        <module>agentflow4j-graph</module>
+        <module>agentflow4j-squad</module>
+        <module>agentflow4j-checkpoint</module>
+        <module>agentflow4j-resilience4j</module>
+        <module>agentflow4j-cli-agents</module>
+        <module>agentflow4j-test</module>
+        <module>agentflow4j-starter</module>
+        <module>agentflow4j-playground</module>
+        <module>agentflow4j-samples</module>
     </modules>
 
     <properties>
@@ -70,38 +71,43 @@
             </dependency>
 
             <dependency>
-                <groupId>io.github.asekka</groupId>
-                <artifactId>spring-agent-flow-core</artifactId>
+                <groupId>io.github.datallmhub</groupId>
+                <artifactId>agentflow4j-core</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>io.github.asekka</groupId>
-                <artifactId>spring-agent-flow-graph</artifactId>
+                <groupId>io.github.datallmhub</groupId>
+                <artifactId>agentflow4j-graph</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>io.github.asekka</groupId>
-                <artifactId>spring-agent-flow-squad</artifactId>
+                <groupId>io.github.datallmhub</groupId>
+                <artifactId>agentflow4j-squad</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>io.github.asekka</groupId>
-                <artifactId>spring-agent-flow-test</artifactId>
+                <groupId>io.github.datallmhub</groupId>
+                <artifactId>agentflow4j-test</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>io.github.asekka</groupId>
-                <artifactId>spring-agent-flow-checkpoint</artifactId>
+                <groupId>io.github.datallmhub</groupId>
+                <artifactId>agentflow4j-checkpoint</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>io.github.asekka</groupId>
-                <artifactId>spring-agent-flow-resilience4j</artifactId>
+                <groupId>io.github.datallmhub</groupId>
+                <artifactId>agentflow4j-resilience4j</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>io.github.asekka</groupId>
-                <artifactId>spring-agent-flow-cli-agents</artifactId>
+                <groupId>io.github.datallmhub</groupId>
+                <artifactId>agentflow4j-cli-agents</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.datallmhub</groupId>
+                <artifactId>agentflow4j-playground</artifactId>
                 <version>${project.version}</version>
             </dependency>
 

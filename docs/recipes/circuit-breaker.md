@@ -1,17 +1,17 @@
 # Recipe — Circuit breaker with Resilience4j
 
 A circuit breaker fails fast when an upstream is unhealthy instead of burning
-retries and tying up threads. In `spring-agent-flow` the graph module defines a
+retries and tying up threads. In `agentflow4j` the graph module defines a
 provider-agnostic `CircuitBreakerPolicy` SPI; the
-`spring-agent-flow-resilience4j` module ships an adapter backed by
+`agentflow4j-resilience4j` module ships an adapter backed by
 [Resilience4j](https://resilience4j.readme.io/).
 
 ## 1. Module
 
 ```xml
 <dependency>
-    <groupId>com.github.datallmhub.spring-agent-flow</groupId>
-    <artifactId>spring-agent-flow-resilience4j</artifactId>
+    <groupId>com.github.datallmhub.agentflow4j</groupId>
+    <artifactId>agentflow4j-resilience4j</artifactId>
     <version>v0.5.0</version>
 </dependency>
 ```
@@ -49,7 +49,7 @@ node. Use this when nodes call **different** upstreams that should trip
 independently.
 
 ```java
-import io.github.asekka.springai.agents.resilience4j.Resilience4jCircuitBreakerPolicy;
+import io.github.datallmhub.agentflow4j.resilience4j.Resilience4jCircuitBreakerPolicy;
 
 CircuitBreakerPolicy perNode = new Resilience4jCircuitBreakerPolicy(registry);
 

@@ -14,21 +14,21 @@ how the codebase is laid out, and the conventions a PR is expected to follow.
 ## Build and test
 
 ```bash
-git clone https://github.com/datallmhub/spring-agent-flow.git
-cd spring-agent-flow
+git clone https://github.com/datallmhub/agentflow4j.git
+cd agentflow4j
 mvn clean verify
 ```
 
 Run the no-LLM demo to sanity-check your local checkout:
 
 ```bash
-mvn -pl spring-agent-flow-samples exec:java
+mvn -pl agentflow4j-samples exec:java
 ```
 
 Run a single module's tests:
 
 ```bash
-mvn -pl spring-agent-flow-graph -am test
+mvn -pl agentflow4j-graph -am test
 ```
 
 The CI on `main` builds against Java 17 and 21 with `mvn -B verify -P
@@ -72,10 +72,10 @@ commits as long as each one is self-contained.
 ## Pull requests
 
 - Fork, branch from `main`, push to your fork, open the PR against
-  `datallmhub/spring-agent-flow:main`.
+  `datallmhub/agentflow4j:main`.
 - Describe the motivation in the PR body, not just the diff. If the change
   affects API surface or default behaviour, call it out explicitly.
-- Add or update tests for any behavioural change. The `spring-agent-flow-test`
+- Add or update tests for any behavioural change. The `agentflow4j-test`
   module exposes `MockAgent` / `TestGraph` to keep tests LLM-free.
 - Update the relevant recipe under `docs/recipes/` when you add or change a
   user-facing capability.

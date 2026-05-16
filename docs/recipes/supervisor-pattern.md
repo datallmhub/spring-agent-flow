@@ -9,7 +9,7 @@ The coordinator asks the LLM to pick the best executor name from the registered
 set.
 
 ```java
-import io.github.asekka.springai.agents.squad.*;
+import io.github.datallmhub.agentflow4j.squad.*;
 
 ExecutorAgent researcher = ExecutorAgent.builder()
         .name("research")
