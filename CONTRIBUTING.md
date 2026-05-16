@@ -77,8 +77,6 @@ commits as long as each one is self-contained.
   affects API surface or default behaviour, call it out explicitly.
 - Add or update tests for any behavioural change. The `agentflow4j-test`
   module exposes `MockAgent` / `TestGraph` to keep tests LLM-free.
-- Update the relevant recipe under `docs/recipes/` when you add or change a
-  user-facing capability.
 - CI must be green before review.
 
 ## Reporting bugs

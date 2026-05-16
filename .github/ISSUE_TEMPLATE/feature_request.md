@@ -28,7 +28,6 @@ Which area would this change affect?
 - [ ] starter
 - [ ] samples
 - [ ] cli-agents
-- [ ] docs/recipes
 - [ ] other:
 
 ## API or behavior impact
@@ -49,7 +48,6 @@ Describe any alternatives or workarounds you considered.
 Would this require tests or documentation updates?
 
 - [ ] Tests
-- [ ] Recipe under `docs/recipes/`
 - [ ] README update
 - [ ] Not sure
 

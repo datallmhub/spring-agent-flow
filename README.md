@@ -336,8 +336,6 @@ AgentGraph.builder()
     .build();
 ```
 
-See [resilient-typed-executor.md](docs/recipes/resilient-typed-executor.md) and [circuit-breaker.md](docs/recipes/circuit-breaker.md).
-
 ---
 
 ## 📈 Observability (Micrometer)
@@ -370,19 +368,6 @@ AgentResult result = trace.invoke(AgentContext.of("test"));
 assertThat(trace.visitedInOrder("a", "b")).isTrue();
 assertThat(result.text()).isEqualTo("done");
 ```
-
----
-
-## 📚 Recipes
-
-- [ReAct loop](docs/recipes/react-loop.md) — self-correcting agent with observation/action cycles
-- [Supervisor pattern](docs/recipes/supervisor-pattern.md) — coordinator re-routes until done
-- [Parallel executors](docs/recipes/parallel-executors.md) — fan-out/fan-in
-- [Subgraphs](docs/recipes/subgraphs.md) — plug a graph in as a node
-- [Human-in-the-loop](docs/recipes/human-in-the-loop.md) — interrupt, wait for human input, resume
-- [Durable runs](docs/recipes/durable-runs.md) — JDBC or Redis checkpoint store, resume after crash
-- [Resilient typed executor](docs/recipes/resilient-typed-executor.md) — tool audit + typed output + retry
-- [Circuit breaker](docs/recipes/circuit-breaker.md) — trip upstream calls with Resilience4j
 
 ---
 
