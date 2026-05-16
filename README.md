@@ -1,4 +1,4 @@
-# spring-agent-flow
+# AgentFlow4J
 
 **Build stateful multi-agent workflows in Java — with graphs, retries, and persistence.**
 
