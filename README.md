@@ -158,14 +158,6 @@ dependencies { implementation 'com.github.datallmhub.agentflow4j:agentflow4j-sta
 
 ---
 
-## 📝 Note on scope
-
-This project is independent and not affiliated with [`spring-ai-community/agent-client`](https://github.com/spring-ai-community/agent-client), which focuses on CLI agent integrations.
-
-**AgentFlow4J** is a graph-based runtime for stateful, multi-step agent workflows on top of Spring AI.
-
----
-
 ## 🤝 Contributing & License
 
 Contributions welcome — see [CONTRIBUTING.md](CONTRIBUTING.md).
