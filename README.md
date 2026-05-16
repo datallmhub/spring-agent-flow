@@ -13,7 +13,7 @@ No orchestration code. No glue logic. Just define your agents and run.
 
 ## 🚀 Live demo of a real-world use case built with Spring Agent Flow
 
-🔴 Explore a multi-agent **USE CASE** built with **Spring Agent Flow**:
+🔴 Sample of multi-agent **USE CASE** built with **Spring Agent Flow**:
 
 <img width="800" height="400" alt="chrome-capture-2026-05-04" src="https://github.com/user-attachments/assets/8825501e-f1bf-4c27-b734-be348cd83e12" />
 
