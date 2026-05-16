@@ -160,7 +160,7 @@ dependencies { implementation 'com.github.datallmhub.agentflow4j:agentflow4j-sta
 
 ## 📝 Note on scope
 
-AgentFlow4J is an **independent** community project. It is **not** an official Spring or Spring AI project, and is not affiliated with the Spring team.
+It is not an official Spring project.
 
 ---
 
